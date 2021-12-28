@@ -5,9 +5,9 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
 import com.github.dawidowoc.quotesapp.R
-import com.github.dawidowoc.quotesapp.quotes.DummyQuotesDao
 import com.github.dawidowoc.quotesapp.quotes.NextQuoteProvider
 import com.github.dawidowoc.quotesapp.quotes.SharedPreferencesNextQuoteStateDao
+import com.github.dawidowoc.quotesapp.quotes.SharedPreferencesQuotesDao
 
 /**
  * Implementation of App Widget functionality.
@@ -21,7 +21,10 @@ class QuotesWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         nextQuoteProvider =
-            NextQuoteProvider(DummyQuotesDao(), SharedPreferencesNextQuoteStateDao(context))
+            NextQuoteProvider(
+                SharedPreferencesQuotesDao(context),
+                SharedPreferencesNextQuoteStateDao(context)
+            )
 
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {

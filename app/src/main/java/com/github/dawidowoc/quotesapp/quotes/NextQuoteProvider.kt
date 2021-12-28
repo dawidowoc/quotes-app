@@ -33,7 +33,6 @@ interface NextQuoteStateDao {
 
 class SharedPreferencesNextQuoteStateDao(private val context: Context) : NextQuoteStateDao {
 
-
     override fun getCurrentQuoteId(): Int {
         val preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
         return preferences.getInt("current.quote.id", -1)
