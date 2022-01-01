@@ -41,4 +41,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        findViewById<EditText>(R.id.quotes_list).setText(
+            serializeQuotes(
+                SharedPreferencesQuotesDao(
+                    this
+                ).getQuotes()
+            )
+        )
+    }
 }

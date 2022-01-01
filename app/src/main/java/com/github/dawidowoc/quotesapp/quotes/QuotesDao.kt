@@ -8,6 +8,8 @@ interface QuotesDao {
 }
 
 class SharedPreferencesQuotesDao(private val context: Context) : QuotesDao {
+    private val maxCharsInQuote = 500
+    private val maxQuotes = 1000
 
     private val defaultQuotes =
         "External things are not the problem. It's your assessment of them. Which you can erase right now.\n" +
@@ -18,9 +20,21 @@ class SharedPreferencesQuotesDao(private val context: Context) : QuotesDao {
 
     override fun saveQuotes(quotes: List<String>) {
         with(getSharedPreferences().edit()) {
-            putString("quotes", serializeQuotes(quotes))
+            putString("quotes", serializeQuotes(formatInput(quotes)))
             apply()
         }
+    }
+
+    private fun formatInput(quotes: List<String>): List<String> {
+        val formattedQuotes = quotes
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map { if (it.length > maxCharsInQuote) it.substring(0, maxCharsInQuote) else it }
+
+        return formattedQuotes.subList(
+            0,
+            if (formattedQuotes.size > maxQuotes) maxQuotes else formattedQuotes.size
+        )
     }
 
     override fun getQuotes(): List<String> {
