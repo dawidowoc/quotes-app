@@ -48,4 +48,9 @@ class SharedPreferencesQuotesDao(private val context: Context) : QuotesDao {
 fun serializeQuotes(quotes: List<String>): String =
     if (quotes.isEmpty()) "" else quotes.reduce { acc, s -> acc + "\n" + s }
 
-fun deserializeQuotes(quotes: String?): List<String> = quotes?.split("\n") ?: listOf()
+fun deserializeQuotes(quotes: String?): List<String> {
+    if (quotes.isNullOrEmpty()) {
+        return listOf()
+    }
+    return quotes.split("\n")
+}
