@@ -23,15 +23,14 @@ class QuotesWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        nextQuoteProvider =
-            NextQuoteProvider(
-                SharedPreferencesQuotesDao(context),
-                SharedPreferencesNextQuoteStateDao(context)
-            )
+        val nextQuote = NextQuoteProvider(
+            SharedPreferencesQuotesDao(context),
+            SharedPreferencesNextQuoteStateDao(context)
+        ).getNextQuote()
 
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId, nextQuoteProvider)
+            updateAppWidget(context, appWidgetManager, appWidgetId, nextQuote)
         }
     }
 
@@ -48,12 +47,11 @@ internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int,
-    nextQuoteProvider: NextQuoteProvider
+    nextQuote: String
 ) {
-    val widgetText = nextQuoteProvider.getNextQuote()
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.quotes_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
+    views.setTextViewText(R.id.appwidget_text, nextQuote)
 
     setOnClickStartMainActivity(context, views)
 
