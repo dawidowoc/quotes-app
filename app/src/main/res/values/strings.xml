@@ -6,5 +6,6 @@
 
     <string name="quotes_list_label">Quotes list, separated by newlines. Each line represents a single quote:</string>
 
-    <string name="test_trigger_widget_update">Trigger widget update</string>
+    <string name="next_quote_button_title">Next quote</string>
+    <string name="next_quote_button_label">Display next quote in widget. This is automatically triggered every 24h.</string>
 </resources>

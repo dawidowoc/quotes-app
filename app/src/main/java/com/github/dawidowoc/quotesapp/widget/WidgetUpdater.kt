@@ -5,9 +5,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 
-/**
- * For testing purpose only
- */
 class WidgetUpdater(private val context: Context) {
     fun update() {
         val intent = Intent(context, QuotesWidget::class.java)
