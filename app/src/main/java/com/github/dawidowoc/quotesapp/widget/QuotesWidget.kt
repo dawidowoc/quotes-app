@@ -1,9 +1,12 @@
 package com.github.dawidowoc.quotesapp.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
+import com.github.dawidowoc.quotesapp.MainActivity
 import com.github.dawidowoc.quotesapp.R
 import com.github.dawidowoc.quotesapp.quotes.NextQuoteProvider
 import com.github.dawidowoc.quotesapp.quotes.SharedPreferencesNextQuoteStateDao
@@ -52,6 +55,18 @@ internal fun updateAppWidget(
     val views = RemoteViews(context.packageName, R.layout.quotes_widget)
     views.setTextViewText(R.id.appwidget_text, widgetText)
 
+    setOnClickStartMainActivity(context, views)
+
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
+}
+
+private fun setOnClickStartMainActivity(
+    context: Context,
+    views: RemoteViews
+) {
+    val startMainActivityIntent = Intent(context, MainActivity::class.java)
+    val startMainActivityPendingIntent =
+        PendingIntent.getActivity(context, 0, startMainActivityIntent, 0)
+    views.setOnClickPendingIntent(R.id.quotes_widget_layout, startMainActivityPendingIntent)
 }
