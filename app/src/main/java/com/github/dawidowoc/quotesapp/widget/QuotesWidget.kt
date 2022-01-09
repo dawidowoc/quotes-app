@@ -67,6 +67,6 @@ private fun setOnClickStartMainActivity(
 ) {
     val startMainActivityIntent = Intent(context, MainActivity::class.java)
     val startMainActivityPendingIntent =
-        PendingIntent.getActivity(context, 0, startMainActivityIntent, 0)
+        PendingIntent.getActivity(context, 0, startMainActivityIntent, PendingIntent.FLAG_IMMUTABLE)
     views.setOnClickPendingIntent(R.id.quotes_widget_layout, startMainActivityPendingIntent)
 }
