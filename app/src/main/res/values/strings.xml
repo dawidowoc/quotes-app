@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Quotes App</string>
     <string name="widget_default_text">Quotes App</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+
+    <string name="app_widget_description">Shows a quote from the specified list. The quote changes every 24h.</string>
 
     <string name="quotes_list_label">Quotes list, separated by newlines. Each line represents a single quote:</string>
 
