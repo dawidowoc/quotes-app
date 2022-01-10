@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quotes App</string>
+    <string name="app_name">Your Daily Quote</string>
     <string name="widget_default_text">Quotes App</string>
 
     <string name="app_widget_description">Shows a quote from the specified list. The quote changes every 24h.</string>
